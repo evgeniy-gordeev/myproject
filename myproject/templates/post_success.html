@@ -1,1 +1,9 @@
-<h1>Ваша форма успешно отправлена!</h1>
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Ваша форма успешно отправлена!</h1>
+  
+  {% if post.image %}
+    <img src="{{ post.image.url }}" alt="{{ post.text }}">
+  {% endif %}
+{% endblock %}
