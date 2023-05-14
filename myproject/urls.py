@@ -16,14 +16,15 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from .views import post_view, post_success_view
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
 urlpatterns = [
-    path('', post_view, name='post'),
-    path('post/success/', post_success_view, name='post_success'),
-    # ...
+    path('post/', views.post_view, name='post'),
+    path('post/success/', views.post_success_view, name='post_success'),
+    path('post/<int:post_id>/answer/', views.answer_view, name='answer'),
+    path('post/<int:post_id>/answer/success/', views.answer_success_view, name='answer_success'),
 ]
