@@ -1,8 +1,13 @@
 import sqlite3
 from PIL import Image
 from django.shortcuts import render, redirect
-from .forms import PostForm
+from .forms import PostForm, AnswerForm
 
+#главная страница
+def main_view(request):
+    return render(request, 'main.html')
+
+#отправка поста
 def post_view(request): #отправка запроса
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
@@ -23,6 +28,13 @@ def post_view(request): #отправка запроса
         form = PostForm()
     return render(request, 'post.html', {'form': form})
 
-
 def post_success_view(request): #отправка запроса после валидации
     return render(request, 'post_success.html')
+
+#страница о нас
+def about_view(request):
+    return render(request, 'about.html')
+
+#страница с контактами
+def contact_view(request):
+    return render(request, 'contact.html')
