@@ -4,7 +4,44 @@
   <h1>Создать новый пост</h1>
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Создать</button>
+    <div style="width: 500px;">
+      <label for="id_title" style="display: block; margin-bottom: 10px"><b>Заголовок:</b></label>
+      <input type="text" name="title" id="id_title" style="width: 500px; height: 30px; margin-bottom: 10px" required>
+    </div>
+    <div style="width: 500px;">
+      <label for="id_content" style="display: block; margin-bottom: 10px" >Содержание:</label>
+      <div style="position: relative;">
+        <textarea name="content" id="id_content" rows="5" cols="40" style="width: 500px; height: 200px;" required></textarea>
+        <img src="static/images.png" alt="Вопрос" style="position: absolute; top: -50px; right: -500px; width: 296px; height: 170px; background: transparent;">
+      </div>
+      <div>
+        <button type="button" onclick="formatText('bold')"><b>Ж</b></button>
+        <button type="button" onclick="formatText('italic')"><i>К</i></button>
+        <button type="button" onclick="formatText('underline')"><u>П</u></button>
+        <input type="file" id="image" name="image" accept="image/*">
+      </div>
+    </div>
+    <button type="submit" style="background-color: blue; color: white; font-size: 14px; margin-top: 40px;">Создать</button>
   </form>
+  
+  <script>
+    function formatText(style) {
+      var textarea = document.getElementById('id_content');
+      var start = textarea.selectionStart;
+      var end = textarea.selectionEnd;
+      var selectedText = textarea.value.substring(start, end);
+      
+      var formattedText = '';
+      
+      if (style === 'bold') {
+        formattedText = '<b>' + selectedText + '</b>';
+      } else if (style === 'italic') {
+        formattedText = '<i>' + selectedText + '</i>';
+      } else if (style === 'underline') {
+        formattedText = '<u>' + selectedText + '</u>';
+      }
+      
+      textarea.value = textarea.value.substring(0, start) + formattedText + textarea.value.substring(end);
+    }
+  </script>
 {% endblock %}

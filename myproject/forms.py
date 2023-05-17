@@ -1,9 +1,12 @@
 from django import forms
+from .models import Post, Answer
 
-class PostForm(forms.Form):
-    text = forms.CharField(label='Введите текст', widget=forms.Textarea)
-    image = forms.ImageField(label='Введите изображение', required=False)
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('title', 'content')
 
-class AnswerForm(forms.Form):
-    text = forms.CharField(label='Введите текст', widget=forms.Textarea)
-    image = forms.ImageField(label='Введите изображение', required=False)
+class AnswerForm(forms.ModelForm):
+    class Meta:
+        model = Answer
+        fields = ('content',)

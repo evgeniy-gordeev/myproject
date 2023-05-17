@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Результаты поиска</h1>
+  <p>Поиск: {{ search_query }}</p>
+  
+  {% if posts %}
+    <ul>
+      {% for post in posts %}
+        <li>{{ post.title }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Нет результатов</p>
+  {% endif %}
+{% endblock %}
