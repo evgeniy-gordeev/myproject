@@ -2,7 +2,12 @@
 
 {% block content %}
 
+  <meta charset="UTF-8">
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  
+
   <form method="post" enctype="multipart/form-data">
+
     <h1>Создать новый пост</h1>
     {% csrf_token %}
 
@@ -15,22 +20,17 @@
     {% comment %}Содержание{% endcomment %}
     <div class="form-field">
       <label for="id_content" class="form-label" style="display: block; margin-bottom: 10px;"><strong>Содержание:</strong></label>
-      <textarea name="content" id="id_content" class="form-textarea" style="width: 500px; height: 200px;" required></textarea>
-      <div class="formatting-buttons">
-        <button type="button" onclick="formatText('bold')" class="formatting-button"><b>Ж</b></button>
-        <button type="button" onclick="formatText('italic')" class="formatting-button"><i>К</i></button>
-        <button type="button" onclick="formatText('underline')" class="formatting-button"><u>П</u></button>
-        <button type="button" onclick="formatText('orderedList')" class="formatting-button">1.</button>
-        <button type="button" onclick="formatText('unorderedList')" class="formatting-button">&bull;</button>
-        <button type="button" onclick="formatText('link')" class="formatting-button">Ссылка</button>
-      </div>
+      <div id="editor" class="form-input" style="width: 500px; height: 100px; margin-bottom: 10px; background-color: white;"></div>
+      <textarea name="content" id="id_content" style="display: none;"></textarea>
     </div>
+
 
     {% comment %}Вставить картинку{% endcomment %}
     <div class="form-field">
       <input type="file" id="id_image" name="image" accept="image/*">
     </div>
     
+    {% comment %}Кнопка отправить{% endcomment %}
     <button type="submit" class="create-button" style="background-color: blue; color: white; font-size: 14px; margin-top: 40px;">Создать</button>
   </form>
 
@@ -38,41 +38,35 @@
     <img src="../../static/images.png" alt="Вопрос" class="question-image" style="position: absolute; top: 100px; right: 200px; width: 296px; height: 170px; background: transparent;">
   </div>
 
-  <script>
-    function formatText(style) {
-      var textarea = document.getElementById('id_content');
-      var start = textarea.selectionStart;
-      var end = textarea.selectionEnd;
-      var selectedText = textarea.value.substring(start, end);
-      var formattedText = '';
-    
-      if (style === 'bold') {
-        formattedText = '<strong>' + selectedText + '</strong>';
-      } else if (style === 'italic') {
-        formattedText = '<em>' + selectedText + '</em>';
-      } else if (style === 'underline') {
-        formattedText = '<u>' + selectedText + '</u>';
-      } else if (style === 'orderedList') {
-        var lines = selectedText.split('\n');
-        formattedText = lines.map(function(line, index) {
-          return (index + 1) + '. ' + line;
-        }).join('\n');
-      } else if (style === 'unorderedList') {
-        var lines = selectedText.split('\n');
-        formattedText = lines.map(function(line) {
-          return '• ' + line;
-        }).join('\n');
-      } else if (style === 'link') {
-        var url = prompt('Введите URL ссылки:');
-        if (url) {
-          formattedText = '<a href="' + url + '">' + selectedText + '</a>';
-        }
-      }
-    
-      var updatedValue = textarea.value.substring(0, start) + formattedText + textarea.value.substring(end);
-      textarea.value = updatedValue;
-      textarea.setSelectionRange(start, start + formattedText.length);
+  <style>
+    .return-link {
+      position: fixed;
+      top: 10px;
+      right: 10px;
     }
+  </style>
+  
+  <a href="{% url 'main' %}" class="return-link" style="position: absolute; top: 50px; right: 200px;" >Вернуться на главную</a>
+  
+
+  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+  <script>
+    var quill = new Quill('#editor', {
+      theme: 'snow'
+    });
+
   </script>
+
+  <style>
+    .ql-toolbar {
+      width: 500px;
+      background-color: #eaf6ff; /* Нежно голубой фон */
+    }
+  
+    .ql-container {
+      width: 500px;
+    }
+  </style>
+  
 
 {% endblock %}

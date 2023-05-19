@@ -48,7 +48,10 @@ def answer_view(request, post_id):
 
     return render(request, 'main/questions/answer.html', {'form': form, 'post': post})
 
+
 #добавить вопрос
+from django.contrib import messages
+
 def post_view(request):
     search_query = request.GET.get('search', '')
     posts = Post.objects.filter(Q(title__icontains=search_query) | Q(content__icontains=search_query))
@@ -61,6 +64,9 @@ def post_view(request):
                 post.image = request.FILES['image']
             post.save()
             return redirect('main')
+        else:
+            print(form.errors)  # Вывод ошибок формы в консоль
+            messages.error(request, 'Ошибка при создании поста.')  # Отображение сообщения об ошибке пользователю
     else:
         form = PostForm()
 
