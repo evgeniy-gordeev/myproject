@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+  <link rel="stylesheet" type="text/css" href="{% static 'question_detail.css' %}">
+
+  <div class="container">
+    
+    {% comment %} Question {% endcomment %}
+    <div class="question">
+      <h1 class="question-title">{{ question.title }}</h1>
+      <p>{{ question.content }}</p>
+      {% if question.image %}
+        <img src="{{ question.image.url }}" alt="Question Image">
+      {% endif %}
+      <p class="timestamp">Asked at: {{ question.created_at }}</p>
+    </div>
+    
+    {% comment %} Answers {% endcomment %}
+    <div class="answers">
+      <h2>Answers:</h2>
+      {% for answer in question.answer_set.all %}
+        <div class="answer">
+          <p>{{ answer.content }}</p>
+          {% if answer.image %}
+            <img src="{{ answer.image.url }}" alt="Answer Image">
+          {% endif %}
+          <p class="timestamp">Answered at: {{ answer.created_at }}</p>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% comment %} Your answer {% endcomment %}
+    <div class="your-answer">
+      <h2>Your Answer</h2>
+      <form method="post" action="{% url 'answer' question.id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <textarea id="id_content" name="content" rows="5" cols="50"></textarea>
+        <br>
+        <input type="file" id="id_image" name="image" accept="image/*">
+        <br>
+        <input type="submit" value="Submit">
+        <div>
+          <button type="button" onclick="formatText('bold')"><b>Ж</b></button>
+          <button type="button" onclick="formatText('italic')"><i>К</i></button>
+          <button type="button" onclick="formatText('underline')"><u>П</u></button>
+          <button type="button" onclick="formatText('orderedList')">1.</button>
+          <button type="button" onclick="formatText('unorderedList')">&bull;</button>
+          <button type="button" onclick="formatText('link')">Ссылка</button>
+        </div>
+      </form>
+    </div>
+    
+    <script>
+      function formatText(style) {
+        var textarea = document.getElementById('id_content');
+        var start = textarea.selectionStart;
+        var end = textarea.selectionEnd;
+        var selectedText = textarea.value.substring(start, end);
+        var formattedText = '';
+    
+        if (style === 'bold') {
+          formattedText = '<strong>' + selectedText + '</strong>';
+        } else if (style === 'italic') {
+          formattedText = '<em>' + selectedText + '</em>';
+        } else if (style === 'underline') {
+          formattedText = '<u>' + selectedText + '</u>';
+        } else if (style === 'orderedList') {
+          var lines = selectedText.split('\n');
+          formattedText = lines.map(function(line, index) {
+            return (index + 1) + '. ' + line;
+          }).join('\n');
+        } else if (style === 'unorderedList') {
+          var lines = selectedText.split('\n');
+          formattedText = lines.map(function(line) {
+            return '• ' + line;
+          }).join('\n');
+        } else if (style === 'link') {
+          var url = prompt('Введите URL ссылки:');
+          if (url) {
+            formattedText = '<a href="' + url + '">' + selectedText + '</a>';
+          }
+        }
+    
+        var updatedValue = textarea.value.substring(0, start) + formattedText + textarea.value.substring(end);
+        textarea.value = updatedValue;
+        textarea.setSelectionRange(start, start + formattedText.length);
+      }
+    </script>
+    
+  </div>
+  
+{% endblock %}

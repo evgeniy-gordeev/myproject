@@ -1,6 +1,8 @@
+/* Фон сайта */
 body {
-  background-color: blue;
+  background-color: #F5F5F5;
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 100% 20px;
+  background-position: 0 0, 0 10px;
 }
-.wide-content-field {
-  width: 500px;
-}
+
