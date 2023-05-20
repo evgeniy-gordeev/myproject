@@ -16,11 +16,12 @@
 .question {
     border: 5px solid black;
     border-radius: 4px;
-    background-color: #05192c;
+    background-color: #d6d9dc;;
     margin: 0 auto;
     padding: 20px;
     max-width: 900px;
     max-height: 400px;
+    overflow-x: hidden;
   }
 .answers {
   border: 5px solid black;
