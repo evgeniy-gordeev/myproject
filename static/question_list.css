@@ -1,23 +1,33 @@
-/* Стили для списка вопросов */
+/* Styles for the question list */
 .question {
-    background-color: #ffffff;
-    border: 1px solid #d6d9dc;
-    border-radius: 4px;
-    padding: 20px;
-  }
-  .question-title {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  .question-details {
-    color: #666666;
-    margin-bottom: 20px;
-  }
-  .timestamp {
-    font-size: 14px;
-    color: #999999;
-    position: relative;
-    top: 10px;
-    right: -700px;
-  }  
+  background-color: #e25f5f;
+  border: 1px solid #d6d9dc;
+  border-radius: 4px;
+  padding: 60px;
+}
+
+.question-title {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+}
+
+.question-details {
+  color: #666666;
+  margin-bottom: 20px;
+  word-break: break-all;
+}
+
+.question-details > p {
+  font-size: 34px;
+  word-break: break-all;
+}
+
+.timestamp {
+  font-size: 14px;
+  color: #999999;
+  position: relative;
+  top: 10px;
+  right: -700px;
+}
