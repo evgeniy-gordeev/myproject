@@ -1,10 +1,11 @@
 import sqlite3
 from PIL import Image
 from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.contrib import messages
 from django.db.models import Q
 from django.core.paginator import Paginator
 from .forms import PostForm, AnswerForm
-from .models import Post
+from .models import Post, Answer
 
 #главная страница
 def main_view(request):
@@ -37,7 +38,7 @@ def answer_view(request, post_id):
     post = Post.objects.get(pk=post_id)
 
     if request.method == 'POST':
-        form = AnswerForm(request.POST)
+        form = AnswerForm(request.POST, request.FILES)
         if form.is_valid():
             answer = form.save(commit=False)
             answer.post = post
@@ -48,10 +49,7 @@ def answer_view(request, post_id):
 
     return render(request, 'main/questions/answer.html', {'form': form, 'post': post})
 
-
 #добавить вопрос
-from django.contrib import messages
-
 def post_view(request):
     search_query = request.GET.get('search', '')
     posts = Post.objects.filter(Q(title__icontains=search_query) | Q(content__icontains=search_query))
