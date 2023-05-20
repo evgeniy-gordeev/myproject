@@ -11,15 +11,6 @@
       <p id="question-count">Total number of questions: {{ questions.count }}</p>
     </div>
 
-    <style>
-      .heading {
-        margin-top: 50px;
-        margin-bottom: -35px;
-        margin-left: 20px;
-        text-align: left;
-      }
-    </style>
-
     {% comment %}Сортировка{% endcomment %}
 
     <div class="sort-options">
@@ -39,13 +30,6 @@
       }
     </script>
 
-    <style>
-      .sort-options {
-        margin-bottom: 10px;
-        text-align: right;
-      }
-    </style>
-
     {% comment %}Вывод вопросов{% endcomment %}
 
     <div id="question-list">
@@ -57,8 +41,6 @@
         </div>
       {% endfor %}
     </div>
-
-    <link rel="stylesheet" href="{% static 'question_detail.css' %}">
 
     {% comment %}Переключение страниц{% endcomment %}
 
@@ -74,21 +56,19 @@
       {% endif %}
     </div>
 
-    <link rel="stylesheet" href="{% static 'paginator.css' %}">
-
-    {% comment %}Фильтр по заголовку{% endcomment %}
-
-    <div class="search-container">
-      <label for="filter-input">Filter by title:</label>
-      <input type="text" id="filter-input">
-      <button onclick="handleSearch()">Search</button>
-    </div>
-    
-    <script src="{% static 'search_bar.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'search_bar.css' %}">
-
   </div>
 
   <link rel="stylesheet" href="{% static 'questions_container.css' %}">
+
+  {% comment %}Фильтр по заголовку{% endcomment %}
+
+  <div class="search-container">
+    <label for="filter-input">Filter by title:</label>
+    <input type="text" id="filter-input">
+    <button onclick="handleSearch()">Search</button>
+  </div>
+    
+  <script src="{% static 'search_bar.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'search_bar.css' %}">
     
 {% endblock %}
