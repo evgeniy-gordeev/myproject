@@ -34,6 +34,15 @@ def question_detail(request, post_id):
     question = get_object_or_404(Post, pk=post_id)
     return render(request, 'main/questions/question_detail.html', {'question': question})
 
+def delete_answer(request, answer_id):
+    answer = get_object_or_404(Answer, pk=answer_id)
+    if answer.is_deleted:
+        answer.delete()
+    else:
+        answer.is_deleted = True
+        answer.save()
+    return redirect(reverse('question_detail', kwargs={'post_id': answer.post_id}))
+
 def answer_view(request, post_id):
     post = Post.objects.get(pk=post_id)
 

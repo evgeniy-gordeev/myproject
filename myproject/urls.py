@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.urls import path
-from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from . import views
 
 urlpatterns = [
 
@@ -16,6 +16,7 @@ urlpatterns = [
     #questions
     path('main/questions/questions.html', views.questions_view, name='questions'),
     path('main/questions/questions/<int:post_id>/', views.question_detail, name='question_detail'),
+    path('delete_answer/<int:answer_id>/', views.delete_answer, name='delete_answer'),
     path('answer/<int:post_id>/', views.answer_view, name='answer'),
 
     #add question

@@ -26,14 +26,15 @@
     <div class="answers">
       <h2>Answers:</h2>
       {% for answer in question.answer_set.all %}
-        <div class="answer">
-          <p>{{ answer.content | safe }}</p>  <!-- Используйте фильтр 'safe' для отображения отформатированного текста -->
-          {% if answer.image %}
-            <img src="{{ answer.image.url }}" alt="Answer Image">
-          {% endif %}
-          <p class="timestamp">Answered at: {{ answer.created_at }}</p>
-        </div>
-      {% endfor %}
+      <div class="answer">
+        <p>{{ answer.content | safe }}</p>
+        {% if answer.image %}
+          <img src="{{ answer.image.url }}" alt="Answer Image">
+        {% endif %}
+        <p class="timestamp">Answered at: {{ answer.created_at }}</p>
+        <a href="{% url 'delete_answer' answer.id %}">Удалить</a>
+      </div>
+    {% endfor %}    
     </div>
 
     <style>

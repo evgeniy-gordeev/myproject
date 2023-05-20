@@ -2,44 +2,44 @@
 
 {% block content %}
 
-  {% comment %} Make Your answer {% endcomment %}
+    {% comment %} Make Your answer {% endcomment %}
 
-  <div class="your-answer">
-    <h2>Your Answer</h2>
-    <form method="post" action="{% url 'answer' question.id %}" enctype="multipart/form-data">
-      {% csrf_token %}
-      <div id="editor" class="form-input" style="width: 500px; height: 100px; margin-bottom: 10px; background-color: white;"></div>
-      <textarea id="id_content" name="content" style="display: none;"></textarea> 
-      <br>
-      <input type="file" id="id_image" name="image" accept="image/*">
-      <br>
-      <button type="submit" class="create-button" style="background-color: blue; color: white; font-size: 14px; margin-top: 40px;">Создать</button>
-    </form>
-  </div>
+    <div class="your-answer">
+      <h2>Your Answer</h2>
+      <form method="post" action="{% url 'answer' question.id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div id="editor" class="form-input" style="width: 500px; height: 100px; margin-bottom: 10px; background-color: white;"></div>
+        <textarea id="id_content" name="content" style="display: none;"></textarea> 
+        <br>
+        <input type="file" id="id_image" name="image" accept="image/*">
+        <br>
+        <button type="submit" class="create-button" style="background-color: blue; color: white; font-size: 14px; margin-top: 40px;">Создать</button>
+      </form>
+    </div>
 
-  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-  <script>
-    var quill = new Quill('#editor', {
-      theme: 'snow'
-    });
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+      var quill = new Quill('#editor', {
+        theme: 'snow'
+      });
 
-    // Обновление значения скрытого поля 'id_content' при отправке формы
-    var form = document.querySelector('form');
-    form.onsubmit = function() {
-      var content = document.querySelector('#id_content');
-      content.value = quill.root.innerHTML;
-    };
-  </script>
+      // Обновление значения скрытого поля 'id_content' при отправке формы
+      var form = document.querySelector('form');
+      form.onsubmit = function() {
+        var content = document.querySelector('#id_content');
+        content.value = quill.root.innerHTML;
+      };
+    </script>
 
-  <style>
-    .ql-toolbar {
-      width: 500px;
-      background-color: #eaf6ff; /* Нежно голубой фон */
-    }
+    <style>
+      .ql-toolbar {
+        width: 500px;
+        background-color: #eaf6ff; /* Нежно голубой фон */
+      }
 
-    .ql-container {
-      width: 500px;
-    }
-  </style>
+      .ql-container {
+        width: 500px;
+      }
+    </style>
 
 {% endblock %}
