@@ -8,9 +8,9 @@
     <link rel="stylesheet" type="text/css" href="{% static 'menu.css' %}"> <!-- Добавьте эту строку -->
 </head>
 <body>
-    <div id="menu-toggle" onclick="toggleMenu()">Меню</div>
     <div id="navbar" class="navbar">
         <a href="{% url 'main' %}">Главная</a>
+        <a href="{% url 'main' %}">Search</a>
         <a href="{% url 'about' %}">О нас</a>
         <a href="{% url 'contact' %}">Контакты</a>
     </div>
