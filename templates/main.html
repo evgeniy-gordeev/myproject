@@ -2,8 +2,8 @@
 {% load static %}
 {% block content %}
 
-{% include 'main/questions_add/ask_button.html' %} <!-- Включаем файл search.html -->
-{% include 'main/footer.html' %}
-{% include 'main/questions/questions.html' with questions=questions %}
+{% include 'ask_button.html' %} <!-- Включаем файл search.html -->
+{% include 'footer.html' %}
+{% include 'questions.html' with questions=questions %}
 
 {% endblock %}

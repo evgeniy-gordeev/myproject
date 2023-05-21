@@ -21,10 +21,10 @@ def main_view(request):
 
 #меню
 def about_view(request):
-    return render(request, 'main/menu/about.html')
+    return render(request, 'about.html')
 
 def contact_view(request):
-    return render(request, 'main/menu/contact.html')
+    return render(request, 'contact.html')
 
 #вопросы
 def questions_view(request):
@@ -32,7 +32,7 @@ def questions_view(request):
 
 def question_detail(request, post_id):
     question = get_object_or_404(Post, pk=post_id)
-    return render(request, 'main/questions/question_detail.html', {'question': question})
+    return render(request, 'question_detail.html', {'question': question})
 
 def delete_answer(request, answer_id):
     answer = get_object_or_404(Answer, pk=answer_id)
@@ -56,7 +56,7 @@ def answer_view(request, post_id):
     else:
         form = AnswerForm()
 
-    return render(request, 'main/questions/answer.html', {'form': form, 'post': post})
+    return render(request, 'answer.html', {'form': form, 'post': post})
 
 #добавить вопрос
 def post_view(request):
@@ -77,4 +77,4 @@ def post_view(request):
     else:
         form = PostForm()
 
-    return render(request, 'main/questions_add/post.html', {'form': form, 'posts': posts})
+    return render(request, 'post.html', {'form': form, 'posts': posts})
