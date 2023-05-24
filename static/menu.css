@@ -1,5 +1,5 @@
 /* Стили для меню */
-#navbar {
+.navbar {
   position: fixed;
   left: 0;
   top: 0;
@@ -8,28 +8,16 @@
   background-color: #333;
   overflow: hidden;
 }
-#menu-toggle {
-  position: fixed;
-  left: 10px;
-  top: 10px;
-  color: #f2f2f2;
-  cursor: pointer;
-  z-index: 999;
-  text-transform: uppercase;
-}
-#menu-toggle:hover {
-  color: #ddd;
-}
 .navbar a {
   display: block;
   color: #f2f2f2;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  font-size: 25px;
+  font-size: 22px;
 }
 .navbar a:first-child {
-  margin-top: 100px; /* Добавляем отступ сверху только для первой ссылки */
+  margin-top: 150px; /* Добавляем отступ сверху только для первой ссылки */
 }
 .navbar a:hover {
   background-color: #ddd;
