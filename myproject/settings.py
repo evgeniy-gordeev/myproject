@@ -20,7 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'myproject',  # Добавьте имя вашего приложения здесь
+    'myapp',  # Добавьте имя вашего приложения здесь
 ]
 
 

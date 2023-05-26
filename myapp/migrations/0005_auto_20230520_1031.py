@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('myproject', '0004_post_content_html'),
+        ('myapp', '0004_post_content_html'),
     ]
 
     operations = [
